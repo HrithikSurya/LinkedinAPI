@@ -1,6 +1,6 @@
 class CreateUserProfiles < ActiveRecord::Migration[7.0]
   def change
-    drop_table :user_profiles
+    # drop_table :user_profiles
 
     create_table :user_profiles do |t|
       t.string :title

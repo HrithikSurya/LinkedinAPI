@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    # debugger
     @user = User.find(params[:id])
     if @user.present
       render json: @user, status: 200
@@ -45,6 +46,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :qualification, :designation, :location, :role, :experience, :skill_set)
+    params.require(:user).permit(:name, :email, :role)
   end
 end
