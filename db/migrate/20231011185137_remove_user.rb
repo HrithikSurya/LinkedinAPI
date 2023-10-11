@@ -1,4 +1,4 @@
-class DropTable < ActiveRecord::Migration[7.0]
+class RemoveUser < ActiveRecord::Migration[7.0]
   def change
     drop_table :user_profile
   end
