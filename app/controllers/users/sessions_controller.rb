@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
       # debugger
   if resource.persisted?
    render json: {
-     status: { code: 200, message: 'Sign Up Successfully', data: current_user }
+     status: { code: 200, message: 'Signed in Successfully', data: current_user }
    }, status: :ok
   end
  end

@@ -5,21 +5,29 @@ class Ability
 
   def initialize(user)
     # Define abilities for the user here. For example:
-    #
+      # return unless user.job_seeker?
+      # can :manage, UserProfile
+      # can :read, Company
+
+      # return unless user.job_recruiter?
+      # can :manage, JobProfile
+      # can :manage, Company
+
+      # return unless user.admin?
+      # can :manage, :all
+
       return unless user.present?
       can :read, :all
-      return unless user.admin?
-      can :manage, :all
-    #
+      #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
-    #
+    
     # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
-    #
+    
     # The third argument is an optional hash of conditions to further filter the
     # objects.
     # For example, here the user can only update published articles.

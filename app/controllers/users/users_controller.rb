@@ -2,7 +2,7 @@ class Users::UsersController < ApplicationController
   before_action :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |exception|
-    render json: { warning: exception, status: 'authorization_failed' }
+    render json: { warning: exception, status: 'Authorization Failed' }
   end
 
   def index
@@ -11,7 +11,6 @@ class Users::UsersController < ApplicationController
   end
 
   def show
-    # debugger
     @user = User.find(params[:id])
     if @user.present
       render json: @user, status: 200

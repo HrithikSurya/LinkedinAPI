@@ -14,11 +14,25 @@ class User < ApplicationRecord
   end
 
   ROLES = %w{ admin job_seeker job_recruiter }
+  # array of strings {"admin", "job_seeker", "job_recruiter}
 
-  ROLES.each do |role_name|
-    define_method "#{role_name}?" do 
-      role == role_name
-    end
+  # ROLES.each do |role_name|
+  #   define_method "#{role_name}?" do 
+  #     role == role_name 
+  #   end
+  # end
+
+  def admin?
+    # debugger
+    role == "admin" # role is coming from the user's table
+  end
+
+  def job_seeker?
+    role == "job_seeker"
+  end
+
+  def job_recruiter?
+    role == "job_recruiter"
   end
 
 end
