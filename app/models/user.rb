@@ -1,38 +1,47 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # include Devise::JWT::RevocationStrategies::JTIMatcher
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :validatable,
+  #        :jwt_authenticatable, jwt_revocation_strategy: self
+
+  has_one :user_profile, dependent: :destroy
+  # # validates :email, presence: true, uniquiness: true
+  # # enum :role, { admin: 0, job_seeker: 1, job_recruiter: 2 }
+  
   include Devise::JWT::RevocationStrategies::JTIMatcher
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+  devise :database_authenticatable, :registerable, 
+         :rememberable, :recoverable, :validatable, 
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  has_one :user_profile
-  # validates :email, presence: true, uniquiness: true
-  
-  def jwt_payload
-    super
-  end
-
-  ROLES = %w{ admin job_seeker job_recruiter }
-  # array of strings {"admin", "job_seeker", "job_recruiter}
-
-  # ROLES.each do |role_name|
-  #   define_method "#{role_name}?" do 
-  #     role == role_name 
-  #   end
+  # def jwt_payload
+  #   super
   # end
 
-  def admin?
-    # debugger
-    role == "admin" # role is coming from the user's table
-  end
+  # # ROLES.each do |role_name|
+  # #   define_method "#{role_name}?" do 
+  # #     role == role_name 
+  # #   end
+  # # end
 
-  def job_seeker?
-    role == "job_seeker"
-  end
+  # def admin? 
+  #   # debugger
+  #   role.key(current_user.role) ==  "admin"  # role is coming from the user's table
+  # end
 
-  def job_recruiter?
-    role == "job_recruiter"
-  end
+  # def job_seeker?
+  #   role.key(current_user.role) ==  "job_seeker"  # role is coming from the user's table
+  # end
+
+  # def job_recruiter?
+  #   role.key(current_user.role) ==  "job_recruiter"  # role is coming from the user's table
+  # end
+  
+  # private
+
+  # # def set_default_role
+  # #   self.role ||= :job_seeker
+  # # end
 
 end

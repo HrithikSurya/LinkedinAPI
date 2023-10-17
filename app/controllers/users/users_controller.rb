@@ -1,9 +1,9 @@
 class Users::UsersController < ApplicationController
   before_action :authenticate_user!
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: { warning: exception, status: 'Authorization Failed' }
-  end
+  # rescue_from CanCan::AccessDenied do |exception|
+  #   render json: { warning: exception, status: 'Authorization Failed' }
+  # end
 
   def index
     # @users = User.all
@@ -15,11 +15,12 @@ class Users::UsersController < ApplicationController
     if @user.present
       render json: @user, status: 200
     else
-      render json: { error: 'User not found' }, status: 403
+      render json: { error: 'User not found' }, status: 403 #forbidden403
     end
   end
 
   def create
+    # debugger
     @user = User.new(user_params)
     if @user.save
       render json: @user, status: 200

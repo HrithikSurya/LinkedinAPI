@@ -1,18 +1,24 @@
-# frozen_string_literals :true
-
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+  include RackSessionsFix
+
   respond_to :json
-  
-  # private
-  debbugger
-  
-  def respond_with(resource, options={})
-  if resource.persisted?
-   render json: { message: 'Sign Up Successfully',data: resource }, status: :ok
-  else
-    # render json: { status: { message:'User Couldnot be created',errors: resource.errors.full_messages },
-    # status: :unprocessable_entity }
-    render json: { message:"user could not be created", status: :unprocessable_entity }
+  private
+
+  def respond_with(current_user, _opts = {})
+    if resource.persisted?
+      render json: {
+        status: {code: 200, message: 'Signed up successfully.'},
+        data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
+      }
+    else
+      render json: {
+        status: {message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
+      }, status: :unprocessable_entity
+    end
   end
-  end
+  protected 
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password,:password_confirmation])
+  end 
 end

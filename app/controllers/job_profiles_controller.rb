@@ -2,12 +2,13 @@ class JobProfilesController < ApplicationController
   before_action :set_job_profile, only: [:show, :update, :destroy]
 
   def index
-    if current_user == 'admin' # bug as i think cause current user is a method here and admin is also a method here
+    # if current_user == 'admin' # bug as i think cause current user is a method here and admin is also a method here
+    #pending for cancancan
       @job_profiles = JobProfile.all
-    else
-      @job_profile = current_user.job_profile #it's showing the current user job profile
+    # else
+      # @job_profile = current_user.job_profile #it's showing the current user job profile
       render json: @job_profiles, status: :ok
-    end
+    # end
   end
   
   def create

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     # get '/user', to: 'users#index'
-    resources :users
+    resources :users ,as: 'direct'
   end
 
   resources :job_profiles, except: [:new, :edit]

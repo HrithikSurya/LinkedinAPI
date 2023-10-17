@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
     # can: read, @companies
-    render json: @companies, status: :ok
+    render json: @companies, status: 200
   end
 
   def create
@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
     if @company.save
       render json: @company, status: :created
     else
-      render json: { error: 'Company could not be created',status: :unprocessable_entity }
+      render json: { error: 'Company could not be created',status: 422 }
     end
   end
 
@@ -20,7 +20,7 @@ class CompaniesController < ApplicationController
     if @company.present?
       render json: @company, status: :ok      
     else
-      render json: { error: 'Company Not Found', status: :unprocessable_entity }
+      render json: { error: 'Company Not Found', status: 422 }
     end
   end
 
