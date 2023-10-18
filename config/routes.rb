@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   }
 
   namespace :users do
-    # get '/user', to: 'users#index'
     resources :users ,as: 'direct'
   end
 
   resources :job_profiles, except: [:new, :edit]
   resources :user_profiles, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
+
+  get '/suggestions', to: 'suggestions#index'
 
 end

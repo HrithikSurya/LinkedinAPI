@@ -6,8 +6,8 @@ class Users::UsersController < ApplicationController
   # end
 
   def index
-    # @users = User.all
-    render json: current_user, status: 200
+    @users = User.all
+    # render json: current_user, status: 200
   end
 
   def show
@@ -20,7 +20,6 @@ class Users::UsersController < ApplicationController
   end
 
   def create
-    # debugger
     @user = User.new(user_params)
     if @user.save
       render json: @user, status: 200

@@ -1,5 +1,6 @@
 class UserProfilesController < ApplicationController
   before_action :set_user_profile, only: [:create, :show, :update, :destroy]
+  before_action :check_user_signed_in?
 
   def index
     @user_profile = current_user.user_profile
@@ -7,10 +8,11 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-    if @user_profile.present? #test with different users, check permissions that we need to assign the current user or not
-      render json: @user_profile ,status: 200
+    # if @user_profile.present? #test with different users, check permissions that we need to assign the current user or not
+    if @user_profile
+      render json: @user_profile , status: 200
     else
-      render json: { error: 'User profile does not present', status: :unprocessable_entity }
+      render json: 'User profile does not present', status: :unprocessable_entity
     end
   end
 
@@ -20,24 +22,24 @@ class UserProfilesController < ApplicationController
     if @user_profile.save
       render json: @user_profile ,status: 200
     else
-      render json: { error: 'User profile does not Created', status: :unprocessable_entity }
+      render json: 'User profile does not Created', status: :unprocessable_entity
     end
   end
 
   def update
     if @user_profile.present?
-      render json: message: 'user profile is updated', status: :ok
+      render json: 'user profile is updated', status: 200
     else
-      render json: error: 'User profile does not present', status: 403
+      render json: 'User profile does not present', status: 403
     end
   end
 
   def destroy
     if @user_profile.present?
-      render json: @user_profile, status: :ok
       @user_profile.destroy
+      render json: 'Profile Deleted', status: :ok
     else
-      render json: error: 'User does not present', status: 403
+      render json: 'User does not present', status: 403
     end
   end
   
@@ -47,6 +49,11 @@ class UserProfilesController < ApplicationController
   end
  
   def set_user_profile
-    @user_profile = UserProfile.find[params[:id]]
+    # @user_profile = UserProfile.find[params[:id]]
+    @user_profile = current_user.user_profile
+  end
+
+  def check_user_signed_in?
+    render json: 'user needs to be signed in' unless user_signed_in?
   end
 end
