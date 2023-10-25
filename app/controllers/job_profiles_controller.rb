@@ -46,6 +46,7 @@ class JobProfilesController < ApplicationController
   end
 
   private
+  
   def set_job_profile
     @job_profile = JobProfile.find(params[:id])
   end

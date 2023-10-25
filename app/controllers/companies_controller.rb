@@ -9,6 +9,7 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
+    
     if @company.save
       render json: @company, status: :created
     else

@@ -1,29 +1,22 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  # include Devise::JWT::RevocationStrategies::JTIMatcher
-  # devise :database_authenticatable, :registerable,
-  #        :recoverable, :rememberable, :validatable,
-  #        :jwt_authenticatable, jwt_revocation_strategy: self
-
   has_one :user_profile, dependent: :destroy
-  # # validates :email, presence: true, uniquiness: true
-  # # enum :role, { admin: 0, job_seeker: 1, job_recruiter: 2 }
+  # validates :email, presence: true, uniquiness: true
+  enum :role, { admin: 0, job_seeker: 1, job_recruiter: 2 }
   
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable, :registerable, 
          :rememberable, :recoverable, :validatable, 
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  # def jwt_payload
-  #   super
-  # end
+  def jwt_payload
+    super
+  end
 
-  # # ROLES.each do |role_name|
-  # #   define_method "#{role_name}?" do 
-  # #     role == role_name 
-  # #   end
-  # # end
+  # roles.each do |role_name|
+  #   define_method "#{role_name}?" do 
+  #     role == role_name 
+  #   end
+  # end
 
   # def admin? 
   #   # debugger
@@ -40,8 +33,8 @@ class User < ApplicationRecord
   
   # private
 
-  # # def set_default_role
-  # #   self.role ||= :job_seeker
-  # # end
+  # def set_default_role
+  #   self.role ||= :job_seeker
+  # end
 
 end
