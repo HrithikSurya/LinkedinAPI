@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :user_profiles, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
 
-  get '/suggestions', to: 'suggestions#index'
+  get '/suggestions', to: 'suggestions#user'
 
 end
