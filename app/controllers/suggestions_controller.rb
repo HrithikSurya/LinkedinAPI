@@ -1,4 +1,6 @@
 class SuggestionsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     # show the suggestions
     @suggestions = Suggestion.all

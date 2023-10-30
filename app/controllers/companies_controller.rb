@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_company, only: [:show, :update, :destroy]
 
   def index
     @companies = Company.all
-    # can: read, @companies
     render json: @companies, status: 200
   end
 
@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
     if @company.save
       render json: @company, status: :created
     else
-      render json: { error: 'Company could not be created',status: 422 }
+      render json: { error: 'Company could not be created',status: 422 } #422unprocessable_content
     end
   end
 
@@ -38,7 +38,7 @@ class CompaniesController < ApplicationController
       render json: @company, status: :ok
       @company.destroy
     else
-      render json: { error: ' Company Not Found' }, status: 403
+      render json: { error: ' Company Not Found' }, status: 403 #403forbidden
     end
   end
 

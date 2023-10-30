@@ -1,13 +1,10 @@
 class Users::UsersController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
-
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   render json: { warning: exception, status: 'Authorization Failed' }
-  # end
 
   def index
     @users = User.all
-    # render json: current_user, status: 200
+    render json: @users, status: 200
   end
 
   def show

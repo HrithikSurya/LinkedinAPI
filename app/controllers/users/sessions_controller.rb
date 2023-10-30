@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
         code: 200, message: 'Logged in successfully.',
         user: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
       }
-    }, status: :ok
+    }, status: :ok 
   end
   def respond_to_on_destroy
     if request.headers['Authorization'].present?

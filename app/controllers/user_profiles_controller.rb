@@ -1,14 +1,15 @@
 class UserProfilesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_user_profile, only: [:create, :show, :update, :destroy]
-  before_action :check_user_signed_in?
+  # before_action :check_user_signed_in?
 
   def index
-    @user_profile = current_user.user_profile
-    render json: @user_profile, status: 200
+    # @user_profile = current_user.user_profile
+    @user_profiles = UserProfile.all
+    render json: @user_profiles, status: 200
   end
 
   def show
-    # if @user_profile.present? #test with different users, check permissions that we need to assign the current user or not
     if @user_profile
       render json: @user_profile , status: 200
     else
@@ -18,7 +19,8 @@ class UserProfilesController < ApplicationController
 
   def create
     @user_profile = UserProfile.new(user_profile_params)
-    @user_profile.user_id = current_user.id #user_id must be present otherwise it will give error ("User must Exists")
+    @user_profile.user_id = current_user.id 
+
     if @user_profile.save
       render json: @user_profile ,status: 200
     else
@@ -27,7 +29,7 @@ class UserProfilesController < ApplicationController
   end
 
   def update
-    if @user_profile.present?
+    if @user_profile.present? #user_profile.changed? then save user_profile
       render json: 'user profile is updated', status: 200
     else
       render json: 'User profile does not present', status: 403
@@ -49,8 +51,7 @@ class UserProfilesController < ApplicationController
   end
  
   def set_user_profile
-    # @user_profile = UserProfile.find[params[:id]]
-    @user_profile = current_user.user_profile
+    @user_profile = UserProfile.find(params[:id])
   end
 
   def check_user_signed_in?
