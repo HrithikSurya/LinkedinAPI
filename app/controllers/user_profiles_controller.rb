@@ -1,6 +1,6 @@
 class UserProfilesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user_profile, only: [:create, :show, :update, :destroy]
+  before_action :set_user_profile, only: [:show, :update, :destroy]
   # before_action :check_user_signed_in?
 
   def index
@@ -28,16 +28,24 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  def update
-    if @user_profile.present? #user_profile.changed? then save user_profile
-      render json: 'user profile is updated', status: 200
+  def update #check it
+    if @user_profile
+      if @user_profile.changed?
+        if @user_profile.save
+          render json: 'User profile is updated', status: 200
+        else
+          render json: @user_profile.errors, status: 422
+        end
+      else
+        render json: 'No changes in user profile', status: 200
+      end
     else
-      render json: 'User profile does not present', status: 403
+      render json: 'User profile does not exist', status: 404
     end
   end
-
+  
   def destroy
-    if @user_profile.present?
+    if @user_profile
       @user_profile.destroy
       render json: 'Profile Deleted', status: :ok
     else
@@ -51,6 +59,7 @@ class UserProfilesController < ApplicationController
   end
  
   def set_user_profile
+    # debugger
     @user_profile = UserProfile.find(params[:id])
   end
 

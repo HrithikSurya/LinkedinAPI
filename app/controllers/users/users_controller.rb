@@ -1,6 +1,7 @@
 class Users::UsersController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
+  before_action :set_user, only: [:show, :update, :destroy]
 
   def index
     @users = User.all
@@ -8,8 +9,7 @@ class Users::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    if @user.present
+    if @user
       render json: @user, status: 200
     else
       render json: { error: 'User not found' }, status: 403 #forbidden403
@@ -25,17 +25,19 @@ class Users::UsersController < ApplicationController
     end
   end
 
-  def update
-    @user = User.find(params[:id])
+  def update 
     if @user
-      render json: @user, status: 200
+      if @user.update(user_params)
+        render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes] , status: 200
+      else 
+        render json: @user.errors_full_messages
+      end
     else
-      render json: { error: 'User not found' }, status: 403
+      render json: "user not found", status: 404
     end
-  end
+  end 
 
   def destroy
-    @user = User.find(params[:id])
     if @user
       render json: @user, status: 200
       @user.delete
@@ -46,6 +48,10 @@ class Users::UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])    
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :role)

@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_192158) do
 
   create_table "user_profiles", force: :cascade do |t|
     t.string "title"
-    t.string "designation"
+    t.string "designation" # TODO: company name, default: "fresher"
     t.string "experience"
     t.string "qualification"
     t.string "skill_set"
