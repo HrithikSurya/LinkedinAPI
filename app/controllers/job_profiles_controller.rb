@@ -1,5 +1,6 @@
 class JobProfilesController < ApplicationController
   load_and_authorize_resource
+  before_action :authenticate_user!
   before_action :set_job_profile, only: [:show, :update, :destroy]
 
   def index
@@ -55,6 +56,6 @@ class JobProfilesController < ApplicationController
   end
 
   def job_profile_params
-    params.require(:job_profile).permit(:title, :job_description, :no_of_openings, :requirement, :skills_required)
+    params.require(:job_profile).permit(:title, :job_description, :no_of_openings, :requirement, :skills_required, :company_id)
   end
 end
