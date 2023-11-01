@@ -12,7 +12,7 @@ class Users::UsersController < ApplicationController
     if @user
       render json: @user, status: 200
     else
-      render json: { error: 'User not found' }, status: 403 #forbidden403
+      render json: { error: 'User not found' }, status: 404
     end
   end
 
@@ -21,29 +21,31 @@ class Users::UsersController < ApplicationController
     if @user.save
       render json: @user, status: 200
     else
-      render json: { error: 'User already exists' }, status: 403
+      render json: @user.errors.full_messages, status: 422
     end
   end
 
   def update 
     if @user
       if @user.update(user_params)
-        render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes] , status: 200
-      else 
-        render json: @user.errors_full_messages
+        render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes], status: 200
+      else
+        render json: @user.errors.full_messages, status: 422
       end
     else
       render json: "user not found", status: 404
     end
-  end 
+  end
 
   def destroy
     if @user
-      render json: @user, status: 200
-      @user.delete
-      render json: { message: 'User Deleted Successfully' }, status: 200
+      if @user.destroy
+        render json: { message: 'User Deleted Successfully' }, status: 200
+      else
+        render json: @user.errors.full_messages, status: 422
+      end
     else
-      render json: { error: 'User not found' }, status: 403
+      render json: "user not found", status: 404
     end
   end
 

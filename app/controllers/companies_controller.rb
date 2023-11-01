@@ -9,36 +9,42 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    
     if @company.save
-      render json: @company, status: :created
+      render json: @company, status: 200
     else
-      render json: { error: 'Company could not be created',status: 422 } #422unprocessable_content
+      render json: @company.errors.full_messages, status: 422 #422unprocessable_content
     end
   end
 
   def show
-    if @company.present?
-      render json: @company, status: :ok      
+    if @company
+      render json: @company, status: 200
     else
-      render json: { error: 'Company Not Found', status: 422 }
+      render json: 'Company Not Found', status: 404
     end
   end
 
   def update
-    if @company.present?
-      render json: @companies, status: :ok
+    if @company
+      if @company.update(company_params)
+        render json: @company, status: 200
+      else
+        render json: @company.errors.full_messages, status: 422
+      end
     else
-      render json: { error: 'companies could not be updated', status: :unprocessable_entity }
+      render json: 'company not found', status: 404
     end
   end
 
   def destroy
-    if @company.present?
-      render json: @company, status: :ok
-      @company.destroy
+    if @company
+      if @company.destroy
+        render json: "Company Deleted Successfully", status: 200        
+      else 
+        render json: @company.errors.full_messages, status: 422
+      end
     else
-      render json: { error: ' Company Not Found' }, status: 403 #403forbidden
+      render json: 'Company Not Found', status: 404
     end
   end
 

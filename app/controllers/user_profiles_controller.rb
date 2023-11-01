@@ -1,10 +1,8 @@
 class UserProfilesController < ApplicationController
   load_and_authorize_resource
   before_action :set_user_profile, only: [:show, :update, :destroy]
-  # before_action :check_user_signed_in?
 
   def index
-    # @user_profile = current_user.user_profile
     @user_profiles = UserProfile.all
     render json: @user_profiles, status: 200
   end
@@ -13,7 +11,7 @@ class UserProfilesController < ApplicationController
     if @user_profile
       render json: @user_profile , status: 200
     else
-      render json: 'User profile does not present', status: :unprocessable_entity
+      render json: 'User profile not found', status: 404
     end
   end
 
@@ -22,38 +20,37 @@ class UserProfilesController < ApplicationController
     @user_profile.user_id = current_user.id 
 
     if @user_profile.save
-      render json: @user_profile ,status: 200
+      render json: @user_profile, status: 200
     else
-      render json: 'User profile does not Created', status: :unprocessable_entity
+      render json: @user_profile.errors.full_messages, status: 422
     end
   end
 
-  def update #check it
+  def update
     if @user_profile
-      if @user_profile.changed?
-        if @user_profile.save
-          render json: 'User profile is updated', status: 200
-        else
-          render json: @user_profile.errors, status: 422
-        end
+      if @user_profile.update(user_profile_params)
+        render json: @user_profile, status: 200
       else
-        render json: 'No changes in user profile', status: 200
+        render json: @user_profile.errors, status: 422
       end
     else
-      render json: 'User profile does not exist', status: 404
+      render json: 'User profile Not found', status: 404
     end
   end
   
   def destroy
     if @user_profile
-      @user_profile.destroy
-      render json: 'Profile Deleted', status: :ok
+      if @user_profile.destroy
+        render json: 'Profile Deleted Successfully', status: 200
+      else
+        render json: @job_profile.errors.full_messages, status: 422
+      end
     else
-      render json: 'User does not present', status: 403
-    end
+      render json: 'User profile not found', status: 404
   end
   
   private
+
   def user_profile_params
     params.require(:user_profile).permit(:title, :designation, :experience, :qualification, :skill_set, :location)
   end
@@ -62,8 +59,5 @@ class UserProfilesController < ApplicationController
     # debugger
     @user_profile = UserProfile.find(params[:id])
   end
-
-  def check_user_signed_in?
-    render json: 'user needs to be signed in' unless user_signed_in?
-  end
+  
 end

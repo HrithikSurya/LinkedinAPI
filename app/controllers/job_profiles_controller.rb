@@ -4,50 +4,49 @@ class JobProfilesController < ApplicationController
 
   def index
       @job_profiles = JobProfile.all
-      render json: @job_profiles, status: :ok
+      render json: @job_profiles, status: 200
   end
   
   def create
     @job_profile = JobProfile.new(job_profile_params)
     if @job_profile.save
-      render json: @job_profile, status: :created
+      render json: @job_profile, status: 200
     else
-      render json: { error: 'Job Profile could not be created',status: :unprocessable_entity }
+      render json: @job_profile.errors.full_messages, status: 422
     end
   end
 
   def show
     if @job_profile
-      render json: @job_profile, status: :ok      
+      render json: @job_profile, status: 200      
     else
-      render json: { error: 'JobProfile Not Found', status: 422}
+      render json: 'JobProfile Not Found', status: 404
     end
   end
 
-  def update #check it through route
+  def update
     if @job_profile
-      if @job_profile.changed?
-        if @job_profile.save
-          render json: 'Job profile is updated', status: 200
-        else
-          render json: @job_profile.errors, status: 422 #422unprocessable_entity
-        end
+      if @job_profile.update(job_profile_params)
+        render json: @job_profile, status: 200
       else
-        render json: 'No changes in Job profile', status: 200
+        render json: @job_profile.errors.full_messages, status: 422 #422unprocessable_entity
       end
     else
-      render json: 'Job profile does not exist', status: 404
+      render json: 'Job profile not found', status: 404
     end
   end
 
   def destroy
     if @job_profile
-      @job_profile.destroy
-      render json: { message: 'JobProfile successfully deleted' }, status: :ok
+      if @job_profile.destroy
+        render json: 'JobProfile deleted successfully', status: 200
+      else
+        render json: @job_profile.errors.full_messages, status: 422
+      end
     else
-      render json: { error: 'JobProfile not found' }, status: 404
+      render json: 'JobProfile not found', status: 404
     end
-  end  
+  end
 
   private
   
