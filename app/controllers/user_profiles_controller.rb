@@ -47,6 +47,7 @@ class UserProfilesController < ApplicationController
       end
     else
       render json: 'User profile not found', status: 404
+    end
   end
   
   private
@@ -56,8 +57,7 @@ class UserProfilesController < ApplicationController
   end
  
   def set_user_profile
-    # debugger
     @user_profile = UserProfile.find(params[:id])
   end
-  
+
 end
