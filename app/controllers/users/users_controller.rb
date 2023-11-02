@@ -12,14 +12,14 @@ class Users::UsersController < ApplicationController
     if @user
       render json: @user, status: 200
     else
-      render json: { error: 'User not found' }, status: 404
+      render_not_found
     end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: @user, status: 200
+      render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: 200
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -33,7 +33,7 @@ class Users::UsersController < ApplicationController
         render json: @user.errors.full_messages, status: 422
       end
     else
-      render json: "user not found", status: 404
+      render_not_found
     end
   end
 
@@ -45,14 +45,20 @@ class Users::UsersController < ApplicationController
         render json: @user.errors.full_messages, status: 422
       end
     else
-      render json: "user not found", status: 404
+      render_not_found
     end
   end
 
   private
 
   def set_user
-    @user = User.find(params[:id])    
+    @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_not_found
+  end
+
+  def render_not_found
+    render json: "user not found", status: 404
   end
 
   def user_params

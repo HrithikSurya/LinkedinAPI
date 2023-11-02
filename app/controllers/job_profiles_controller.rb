@@ -21,7 +21,7 @@ class JobProfilesController < ApplicationController
     if @job_profile
       render json: @job_profile, status: 200      
     else
-      render json: 'JobProfile Not Found', status: 404
+      render_not_found
     end
   end
 
@@ -33,7 +33,7 @@ class JobProfilesController < ApplicationController
         render json: @job_profile.errors.full_messages, status: 422 #422unprocessable_entity
       end
     else
-      render json: 'Job profile not found', status: 404
+      render_not_found
     end
   end
 
@@ -45,7 +45,7 @@ class JobProfilesController < ApplicationController
         render json: @job_profile.errors.full_messages, status: 422
       end
     else
-      render json: 'JobProfile not found', status: 404
+      render_not_found
     end
   end
 
@@ -53,6 +53,10 @@ class JobProfilesController < ApplicationController
   
   def set_job_profile
     @job_profile = JobProfile.find(params[:id])
+  end
+
+  def render_not_found
+    render json: 'Job Profile not found', status: 404
   end
 
   def job_profile_params

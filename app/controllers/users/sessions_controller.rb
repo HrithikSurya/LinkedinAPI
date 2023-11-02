@@ -4,13 +4,13 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :json
   private
   def respond_with(current_user, _opts = {})
-    UserMailer.with(user: current_user).login_mail.deliver_now
+    UserMailer.with(user: current_user).login_mail.deliver_later
     render json: {
       status: { 
         code: 200, message: 'Logged in successfully.',
         user: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
       }
-    }, status: :ok 
+    }, status: 200
   end
   def respond_to_on_destroy
     if request.headers['Authorization'].present?
@@ -22,7 +22,7 @@ class Users::SessionsController < Devise::SessionsController
       render json: {
         status: 200,
         message: 'Logged out successfully.'
-      }, status: :ok
+      }, status: 200
     else
       render json: {
         status: 401,

@@ -5,7 +5,11 @@ class ApplicationController < ActionController::API
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password password_confirmation ])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name password])
   end
-    
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: e, status:400
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     render json: exception
   end
