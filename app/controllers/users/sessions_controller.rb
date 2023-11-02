@@ -4,6 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :json
   private
   def respond_with(current_user, _opts = {})
+    UserMailer.with(user: current_user).login_mail.deliver_now
     render json: {
       status: { 
         code: 200, message: 'Logged in successfully.',
