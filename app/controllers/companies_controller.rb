@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     if @company.save
-      render json: @company, status: 200
+      render_company_serializer(@company)
     else
       render json: @company.errors.full_messages, status: 422 #422unprocessable_content
     end
@@ -19,7 +19,7 @@ class CompaniesController < ApplicationController
 
   def show
     if @company
-      render json: @company, status: 200
+      render_company_serializer(@company)
     else
       render json: 'Company Not Found', status: 404
     end
@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
   def update
     if @company
       if @company.update(company_params)
-        render json: @company, status: 200
+        render_company_serializer(@company)
       else
         render json: @company.errors.full_messages, status: 422
       end
@@ -50,6 +50,10 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+  def render_company_serializer(company)
+    render json: CompanySerializer.new(company).serializable_hash[:data][:attributes], status: 200
+  end
 
   def set_company
     @company = Company.find(params[:id])

@@ -11,7 +11,7 @@ class JobProfilesController < ApplicationController
   def create
     @job_profile = JobProfile.new(job_profile_params)
     if @job_profile.save
-      render json: @job_profile, status: 200
+      render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
     else
       render json: @job_profile.errors.full_messages, status: 422
     end
@@ -19,7 +19,7 @@ class JobProfilesController < ApplicationController
 
   def show
     if @job_profile
-      render json: @job_profile, status: 200      
+      render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
     else
       render_not_found
     end
@@ -28,7 +28,7 @@ class JobProfilesController < ApplicationController
   def update
     if @job_profile
       if @job_profile.update(job_profile_params)
-        render json: @job_profile, status: 200
+        render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
       else
         render json: @job_profile.errors.full_messages, status: 422 #422unprocessable_entity
       end

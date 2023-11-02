@@ -10,7 +10,7 @@ class Users::UsersController < ApplicationController
 
   def show
     if @user
-      render json: @user, status: 200
+      render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: 200
     else
       render_not_found
     end
@@ -53,8 +53,6 @@ class Users::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render_not_found
   end
 
   def render_not_found

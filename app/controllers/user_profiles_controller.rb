@@ -10,7 +10,7 @@ class UserProfilesController < ApplicationController
 
   def show
     if @user_profile
-      render json: @user_profile , status: 200
+      render json: UserProfileSerializer.new(@user_profile).serializable_hash[:data][:attributes], status: 200
     else
       render json: 'User profile not found', status: 404
     end
@@ -21,7 +21,7 @@ class UserProfilesController < ApplicationController
     @user_profile.user_id = current_user.id 
 
     if @user_profile.save
-      render json: @user_profile, status: 200
+      render json: UserProfileSerializer.new(@user_profile).serializable_hash[:data][:attributes], status: 200
     else
       render json: @user_profile.errors.full_messages, status: 422
     end
@@ -30,7 +30,7 @@ class UserProfilesController < ApplicationController
   def update
     if @user_profile
       if @user_profile.update(user_profile_params)
-        render json: @user_profile, status: 200
+        render json: UserProfileSerializer.new(@user_profile).serializable_hash[:data][:attributes], status: 200
       else
         render json: @user_profile.errors, status: 422
       end
