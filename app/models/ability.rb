@@ -13,8 +13,7 @@ class Ability
       can :manage, UserProfile, user_id: user.id #workin
       can :read, UserProfile #workin
 
-      # can :read, Suggestion
-      #can :read, Company
+      can :read, Company #workin
 
     elsif user.job_recruiter?
       can :manage, JobProfile #manages those jobprofile they created by their own functionality
@@ -24,6 +23,8 @@ class Ability
       
       can :manage, UserProfile, user_id: user.id
       can :read, UserProfile
+
+      can :manage, Company
 
     elsif user.admin? 
       can :manage, :all
