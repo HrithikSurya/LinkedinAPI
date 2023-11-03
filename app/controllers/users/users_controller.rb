@@ -3,6 +3,10 @@ class Users::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :update, :destroy]
 
+  rescue_from ArgumentError do |error|
+    render json: { message: error } ,status: 200
+  end
+
   def index
     @users = User.all
     render json: @users, status: 200
