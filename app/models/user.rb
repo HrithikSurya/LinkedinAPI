@@ -3,6 +3,9 @@ class User < ApplicationRecord
 
   enum role: %i[admin job_seeker job_recruiter]
   
+  validates :name, presence: true, length: { in: 2..50 }
+
+
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable, :registerable, 
          :rememberable, :recoverable, :validatable, 

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # include ExceptionHandling
+  # not working
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
