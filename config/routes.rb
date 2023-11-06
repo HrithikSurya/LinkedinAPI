@@ -8,8 +8,12 @@ Rails.application.routes.draw do
     resources :users ,as: 'direct'
   end
 
-  resources :job_profiles, except: [:new, :edit]
-  resources :user_profiles, except: [:new, :edit]
+  get 'job_profiles/:page', to: 'job_profiles#index'
+  resources :job_profiles, except: [:index, :new, :edit]
+ 
+  get 'user_profiles/:page', to: 'user_profiles#index'
+  resources :user_profiles, except: [:index, :new, :edit]
+  
   resources :companies, except: [:new, :edit]
 
   get '/suggestions', to: 'suggestions#user'

@@ -4,7 +4,7 @@ class UserProfilesController < ApplicationController
   before_action :set_user_profile, only: [:show, :update, :destroy]
 
   def index
-    @user_profiles = UserProfile.all
+    @user_profiles = UserProfile.order(:id).page(params[:page]).per(2)
     render json: @user_profiles, status: 200
   end
 

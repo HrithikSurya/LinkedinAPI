@@ -55,3 +55,5 @@ gem 'devise-jwt'
 gem 'cancancan'
 
 gem 'jsonapi-serializer'
+
+gem 'kaminari'

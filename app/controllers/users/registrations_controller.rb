@@ -14,12 +14,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
       },status: 200
     else
       render json: {
-        status: {message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
-      }, status: :unprocessable_entity
+        {status: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
+      }, status: 422
     end
   end
+
   protected 
+  
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password,:password_confirmation])
-  end 
+  end
+   
 end

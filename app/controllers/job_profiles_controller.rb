@@ -4,7 +4,7 @@ class JobProfilesController < ApplicationController
   before_action :set_job_profile, only: [:show, :update, :destroy]
 
   def index
-      @job_profiles = JobProfile.all
+      @job_profiles = JobProfile.order(:id).page(params[:page]).per(2)
       render json: @job_profiles, status: 200
   end
   
