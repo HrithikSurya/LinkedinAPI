@@ -1,4 +1,4 @@
 class CompanySerializer
   include JSONAPI::Serializer
-  attributes :company_name, :sector, :location, :establishment
+  attributes :user_id, :company_name, :sector, :location, :establishment
 end

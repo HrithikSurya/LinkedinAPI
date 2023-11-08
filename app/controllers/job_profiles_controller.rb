@@ -4,20 +4,14 @@ class JobProfilesController < ApplicationController
   before_action :set_job_profile, only: [:show, :update, :destroy]
 
   def index
-    @job_profiles = JobProfile.order(:id).page(params[:page]).per(2) #if it's nil so it'll give u routing error 
+    @job_profiles = JobProfile.order(:id).page(params[:page]).per(2) 
+    #it'll give u error if params has nil value
     render json: @job_profiles, status: 200
   end
-  # query interface scopes used in models, services, correct user_role remove admin
-# ammendments
-# user
-# has_one company,
-# 
-# company
-# belongs_to :job_recruiter
-# has_many :job_profiles
-# 
+
   def create
     @job_profile = JobProfile.new(job_profile_params)
+    @job_profile.company_id = current_user.company.id
     if @job_profile.save
       render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
     else
@@ -68,6 +62,6 @@ class JobProfilesController < ApplicationController
   end
 
   def job_profile_params
-    params.require(:job_profile).permit(:title, :job_description, :no_of_openings, :requirement, :skills_required, :company_id)
+    params.require(:job_profile).permit(:title, :job_description, :no_of_openings, :requirement, :skills_required)
   end
 end

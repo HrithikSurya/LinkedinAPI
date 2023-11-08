@@ -5,6 +5,7 @@ class UserProfilesController < ApplicationController
 
   def index
     @user_profiles = UserProfile.order(:id).page(params[:page]).per(2)
+    #it'll give uh error if params has nil value
     render json: @user_profiles, status: 200
   end
 

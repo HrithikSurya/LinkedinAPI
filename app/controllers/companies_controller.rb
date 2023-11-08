@@ -10,6 +10,7 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
+    @company.user_id = current_user.id
     if @company.save
       render_company_serializer(@company)
     else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_08_155240) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_08_160818) do
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
     t.string "sector"
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_155240) do
     t.string "establishment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "job_profiles", force: :cascade do |t|
@@ -26,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_155240) do
     t.string "no_of_openings"
     t.string "requirement"
     t.string "skills_required"
-    t.integer "company_id", null: false
+    t.integer "company_id", null: false #default 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_job_profiles_on_company_id"
@@ -67,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_155240) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "companies", "users"
   add_foreign_key "job_profiles", "companies"
   add_foreign_key "user_profiles", "users"
 end
