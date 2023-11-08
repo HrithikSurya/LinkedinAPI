@@ -5,6 +5,6 @@ class JobProfile < ApplicationRecord
   validates :title, :requirement, length: { in: 6..30 }, presence: true
   validates :job_description, length: { in: 50..500 }, presence: true
   validates :no_of_openings, :company_id, length: { in: 1..10 }, presence: true
-  validates :skills_required, presence: true, length: { in: 10..50 }
+  validates :skills_required, presence: true, length: { minimum: 10 }
   
 end

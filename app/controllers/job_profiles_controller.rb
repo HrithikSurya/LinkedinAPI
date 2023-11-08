@@ -4,10 +4,18 @@ class JobProfilesController < ApplicationController
   before_action :set_job_profile, only: [:show, :update, :destroy]
 
   def index
-      @job_profiles = JobProfile.order(:id).page(params[:page]).per(2)
-      render json: @job_profiles, status: 200
+    @job_profiles = JobProfile.order(:id).page(params[:page]).per(2) #if it's nil so it'll give u routing error 
+    render json: @job_profiles, status: 200
   end
-  
+  # query interface scopes used in models, services, correct user_role remove admin
+# ammendments
+# user
+# has_one company,
+# 
+# company
+# belongs_to :job_recruiter
+# has_many :job_profiles
+# 
   def create
     @job_profile = JobProfile.new(job_profile_params)
     if @job_profile.save

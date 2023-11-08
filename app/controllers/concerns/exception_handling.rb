@@ -12,6 +12,10 @@ module ExceptionHandling
 
     rescue_from ActionController::RoutingError, with: :render_404
     
+    rescue_from ArgumentError do |error|
+      render json: { message: error } ,status: 200
+    end
+    
   end
   
   private
