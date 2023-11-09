@@ -5,7 +5,7 @@ module ExceptionHandling
     rescue_from ActiveRecord::RecordNotFound do |e|
       render json: e, status:404
     end
-    
+  
     rescue_from CanCan::AccessDenied do |exception|
       render json: exception, status:401
     end

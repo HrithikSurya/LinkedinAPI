@@ -1,1 +1,2 @@
-  # query interface scopes used in models, services
+query interface scopes used in models, services
+

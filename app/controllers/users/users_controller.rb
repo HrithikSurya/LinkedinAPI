@@ -10,7 +10,7 @@ class Users::UsersController < ApplicationController
 
   def show
     if @user
-      render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: 200
+      render_user_serializer(@user)
     else
       render_not_found
     end
@@ -19,7 +19,7 @@ class Users::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: 200
+      render_user_serializer(@user)
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -28,7 +28,7 @@ class Users::UsersController < ApplicationController
   def update
     if @user
       if @user.update(user_params)
-        render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes], status: 200
+        render_user_serializer(@user)
       else
         render json: @user.errors.full_messages, status: 422
       end
@@ -50,6 +50,10 @@ class Users::UsersController < ApplicationController
   end
 
   private
+
+  def render_user_serializer(user)
+    render json: UserSerializer.new(user).serializable_hash[:data][:attributes], status: 200
+  end
 
   def set_user
     @user = User.find(params[:id])

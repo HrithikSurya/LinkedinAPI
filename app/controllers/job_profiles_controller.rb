@@ -5,7 +5,7 @@ class JobProfilesController < ApplicationController
 
   def index
     @job_profiles = JobProfile.order(:id).page(params[:page]).per(2) 
-    #it'll give u error if params has nil value
+    #it'll give u empty array if params[:page] is nil
     render json: @job_profiles, status: 200
   end
 
@@ -13,7 +13,7 @@ class JobProfilesController < ApplicationController
     @job_profile = JobProfile.new(job_profile_params)
     @job_profile.company_id = current_user.company.id
     if @job_profile.save
-      render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
+      render_job_profile_serializer(@job_profile)
     else
       render json: @job_profile.errors.full_messages, status: 422
     end
@@ -21,7 +21,7 @@ class JobProfilesController < ApplicationController
 
   def show
     if @job_profile
-      render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
+      render_job_profile_serializer(@job_profile)
     else
       render_not_found
     end
@@ -30,7 +30,7 @@ class JobProfilesController < ApplicationController
   def update
     if @job_profile
       if @job_profile.update(job_profile_params)
-        render json: JobProfileSerializer.new(@job_profile).serializable_hash[:data][:attributes], status: 200
+        render_job_profile_serializer(@job_profile)
       else
         render json: @job_profile.errors.full_messages, status: 422 #422unprocessable_entity
       end
@@ -53,6 +53,10 @@ class JobProfilesController < ApplicationController
 
   private
   
+  def render_job_profile_serializer(job_profile)
+    render json: JobProfileSerializer.new(job_profile).serializable_hash[:data][:attributes], status: 200    
+  end
+
   def set_job_profile
     @job_profile = JobProfile.find(params[:id])
   end
