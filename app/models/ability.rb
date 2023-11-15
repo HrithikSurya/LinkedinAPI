@@ -15,7 +15,7 @@ class Ability
 
       can :read, Company
 
-      can :read, JobApplication
+      can :applied_job_application, JobApplication
 
     elsif user.job_recruiter?
       can :read, Company #read our as well as other companies  
@@ -35,7 +35,10 @@ class Ability
       #update, deletion working on our own created company
       #can manages those jobprofile that are associated with the current_user's company
 
-      can :manage, JobApplication
+      can [:index, :show, :reject_job_application,
+        :accept_job_application,
+        :view_approved_job_application,
+        :view_rejected_job_application], JobApplication
     end
   end
 end

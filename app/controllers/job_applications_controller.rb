@@ -1,8 +1,8 @@
 class JobApplicationsController < ApplicationController
-  load_and_authorize_resource only: :all#, except: [:applied_job_application]
+  load_and_authorize_resource
   before_action :set_job_application, only: [ :show, :reject_job_application,
                                               :accept_job_application ]
-                                              
+
   def index
     @job_applications = JobApplication.all
     render json: @job_applications, status: 200
@@ -17,7 +17,6 @@ class JobApplicationsController < ApplicationController
   end
 
   def applied_job_application
-    authorize! :applied_job_application, current_user if current_user.role == 'job_seeker'
     render json: current_user.user_profile.job_applications, status: 200
   end
 
