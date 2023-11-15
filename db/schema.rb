@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_08_160818) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_14_215014) do
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
     t.string "sector"
@@ -22,22 +22,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_160818) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "job_applications", force: :cascade do |t|
+    t.integer "job_profile_id"
+    t.integer "user_profile_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_profile_id"], name: "index_job_applications_on_job_profile_id"
+    t.index ["user_profile_id"], name: "index_job_applications_on_user_profile_id"
+  end
+
   create_table "job_profiles", force: :cascade do |t|
     t.string "title"
     t.string "job_description"
     t.string "no_of_openings"
     t.string "requirement"
     t.string "skills_required"
-    t.integer "company_id", null: false #default 0
+    t.integer "company_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_job_profiles_on_company_id"
-  end
-
-  create_table "job_profiles_user_profiles", id: false, force: :cascade do |t|
-    t.integer "job_profile_id", null: false
-    t.integer "user_profile_id", null: false
-    t.index ["job_profile_id", "user_profile_id"], name: "job_on_users"
   end
 
   create_table "user_profiles", force: :cascade do |t|

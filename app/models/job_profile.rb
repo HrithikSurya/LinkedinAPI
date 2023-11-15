@@ -1,6 +1,7 @@
 class JobProfile < ApplicationRecord
   belongs_to :company
-  has_and_belongs_to_many :user_profiles
+  has_many :job_applications
+  has_many :user_profiles, through: :job_applications
 
   validates :title, :requirement, length: { in: 6..30 }, presence: true
   validates :job_description, length: { in: 50..500 }, presence: true

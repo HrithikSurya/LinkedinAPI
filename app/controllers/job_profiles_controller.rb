@@ -5,7 +5,6 @@ class JobProfilesController < ApplicationController
 
   def index
     @job_profiles = JobProfile.order(:id).page(params[:page]).per(2) 
-    #it'll give u empty array if params[:page] is nil
     render json: @job_profiles, status: 200
   end
 

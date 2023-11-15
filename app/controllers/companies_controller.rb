@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
     if @company.save
       render_company_serializer(@company)
     else
-      render json: @company.errors.full_messages, status: 422 #422unprocessable_content
+      render json: @company.errors.full_messages, status: 422
     end
   end
 

@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
-  # include ExceptionHandling
-  # not working
+  get 'job_applications/index', to: 'job_applications#index'
+  get 'job_applications/show/:id', to: 'job_applications#show'
+
+  post 'job_applications/accept_job_application/:id', as: 'accept_job_application',
+  to: 'job_applications#accept_job_application'
+
+  post 'job_applications/reject_job_application/:id', as: 'reject_job_application',
+  to: 'job_applications#reject_job_application'
+
+  get 'job_applications/view_approved_job_application', to: 'job_applications#view_approved_job_application'
+  get 'job_applications/view_rejected_job_application', to: 'job_applications#view_rejected_job_application'
+  
+  get 'job_applications/applied_job_application', to: 'job_applications#applied_job_application'
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -17,4 +28,6 @@ Rails.application.routes.draw do
 
   get '/suggestions', to: 'suggestions#user'
 
+  
 end
+ 
