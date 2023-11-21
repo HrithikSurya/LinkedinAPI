@@ -1,2 +1,30 @@
-query interface scopes used in models, services
+rspecs
 
+1. context is an aliases for describe
+and context is written under describe
+
+2. let vs let! memoization refers to the technique of caching the result of a method or a block of code the first time it is invoked
+ and,
+then returning the cached result on subsequent invocations,
+This is often used to avoid redundant computations or database queries in the context of testing
+
+3.Used to define memoized helper methods. let is lazily evaluated, and let! is eagerly evaluated before each example.
+
+4.rails new MyApp -T -d postgresql
+The -T command indicate to skip the installation of minitest. To install an alternative test suite like RSpec
+
+5. before, before(:each) or before(:all):
+Executes code before each tests or before all examples in a group.
+
+6. after, after(:each) or after(:all):
+Executes code after each tests or after all tests in a group.
+
+7. subject: Defines the object that is the target of the example.
+8. raise_error: Specifies that a block of code should raise a particular type of exception.
+9. change: Specifies that a block of code should change the value of something (e.g., a database record count)
+10. have_attributes: Checks if an object has specific attributes with the expected values.
+
+expect(object).to have_attributes(name: 'John', age: 25)
+
+11.include: Checks if a collection includes a particular element.
+expect(array).to include(element)
