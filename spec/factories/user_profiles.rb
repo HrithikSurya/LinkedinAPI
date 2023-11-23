@@ -8,5 +8,3 @@ FactoryBot.define do
     location { Faker::Travel::TrainStation.name(region: 'spain') }
   end
 end
-# :qualification, :skill_set, presence: true, length: { in: 10..300 }
-# :title, :designation, :location, :experience, presence: true, length: { in: 4..30 }

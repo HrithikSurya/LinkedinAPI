@@ -28,3 +28,5 @@ expect(object).to have_attributes(name: 'John', age: 25)
 
 11.include: Checks if a collection includes a particular element.
 expect(array).to include(element)
+
+12. Use shared_context and include_context to group related examples.

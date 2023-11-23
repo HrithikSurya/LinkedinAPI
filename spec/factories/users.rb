@@ -3,9 +3,8 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    role { 1 }
     trait :with_unique_email do
-      sequence(:email) { |n| "unique_email_#{n}@example.com" }
+      sequence(:email) { |n| "unique_email_#{n}@example.com" } 
     end
     # Traits in FactoryBot are used to group together common attributes or behaviors for factory definitions
   end

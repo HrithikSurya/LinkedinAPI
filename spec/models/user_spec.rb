@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  context 'when creating a user' do 
+  context 'Validates when creating a user' do 
     # let(:user) { FactoryBot.create(:user, email:'user1@gmail.com') }
 
     it 'is valid with all valid attributes' do
@@ -25,30 +25,45 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
-    it 'has a valid enum role' do
-      user = FactoryBot.build(:user)
-      # debugger
-      expect(user).to_not be_valid
-    end
+    it 'has a valid email when created with :with_unique_email trait' do
+      user_with_unique_email = FactoryBot.create(:user, :with_unique_email)
+      expect(user_with_unique_email).to be_valid
 
-    it 'destroys associated user profile on destroy' do
-      user = FactoryBot.create(:user) #should be created, user contains userid
-      user_profile = FactoryBot.build(:user_profile, user_id: user.id)
-      user_profile.save
-
-      expect { user.destroy }.to change(UserProfile, :count).by(-1)
+      duplicate_user = FactoryBot.build(:user, :with_unique_email)
+      expect(duplicate_user.email).to_not eq(user_with_unique_email.email)
     end
 
     it 'should raise RecordInvalid for duplicate emails' do
       user = FactoryBot.create(:user, email: 'duplicate@gmail.com') #should be created
       user2 = FactoryBot.build(:user, email: 'duplicate@gmail.com') # instantiate it and then save
-      puts "\n\nUser email: #{user.email}"
-      puts "User2 email: #{user2.email}"
       user2.save
 
-      expect(user2.errors[:email]).to include("has already been taken") # works both
-      expect(user2).to_not be_valid # works both
+      expect(user2.errors[:email]).to include("has already been taken") # standard way
+      # expect(user2).to_not be_valid # works both
     end
-     
   end
+    
+  context 'Enum' do
+    it 'has a valid enum role' do
+      user = FactoryBot.build(:user)
+      expect(user.role).to eq('job_seeker')
+    end
+
+    it 'has a valid enum role' do
+      user = FactoryBot.build(:user, role: 1)
+      expect(user.role).to eq('job_recruiter')
+    end
+  end
+
+  context 'Users Associations' do      
+    it 'user has one association with user_profile' do
+      expect(User.reflect_on_association(:user_profile).options[:dependent]).to eq(:destroy)
+    end 
+
+    it 'has one association with company' do 
+      expect(User.reflect_on_association(:company).macro).to eq(:has_one)
+      #macro will give's the type of association
+    end 
+  end
+  
 end

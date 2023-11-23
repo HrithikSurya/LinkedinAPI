@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_14_215014) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_170746) do
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
     t.string "sector"
@@ -25,9 +25,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_14_215014) do
   create_table "job_applications", force: :cascade do |t|
     t.integer "job_profile_id"
     t.integer "user_profile_id"
-    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["job_profile_id"], name: "index_job_applications_on_job_profile_id"
     t.index ["user_profile_id"], name: "index_job_applications_on_user_profile_id"
   end

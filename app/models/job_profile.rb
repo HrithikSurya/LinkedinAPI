@@ -1,11 +1,11 @@
 class JobProfile < ApplicationRecord
-  belongs_to :company
-  has_many :job_applications
-  has_many :user_profiles, through: :job_applications
+  belongs_to :company                                      #specs done
+  has_many :job_applications                               #specs done
+  has_many :user_profiles, through: :job_applications      #specs done
 
-  validates :title, :requirement, length: { in: 6..30 }, presence: true
-  validates :job_description, length: { in: 50..500 }, presence: true
-  validates :no_of_openings, :company_id, length: { in: 1..10 }, presence: true
-  validates :skills_required, presence: true, length: { minimum: 10 }
+  validates :title, :requirement, length: { in: 6..30 }, presence: true #specs done
+  validates :job_description, length: { in: 50..500 }, presence: true   #specs done
+  validates :no_of_openings, presence: true                             #specs done
+  validates :skills_required, presence: true, length: { minimum: 10 }   #specs done
   
 end

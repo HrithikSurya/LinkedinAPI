@@ -1,11 +1,11 @@
 class User < ApplicationRecord
-  has_one :user_profile, dependent: :destroy
-  has_one :company
+  has_one :user_profile, dependent: :destroy          #specs done
+  has_one :company                                    #specs done
   
-  enum role: %i[ job_seeker job_recruiter ]
+  enum role: %i[ job_seeker job_recruiter ]           #specs done
 
-  validates :name, :role, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :name, :role, presence: true              #specs done
+  validates :email, presence: true, uniqueness: true  #specs done
   
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable, :registerable, 
