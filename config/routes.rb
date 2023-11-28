@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   get 'job_applications/index', to: 'job_applications#index'
   get 'job_applications/show/:id', to: 'job_applications#show'
@@ -27,7 +28,8 @@ Rails.application.routes.draw do
   resources :companies, except: [:new, :edit]
 
   get '/suggestions', to: 'suggestions#user'
-
+  
+  mount Sidekiq::Web => '/sidekiq'    
   
 end
  

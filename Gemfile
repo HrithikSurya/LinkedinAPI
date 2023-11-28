@@ -64,3 +64,9 @@ gem 'kaminari'
 
 #for dummy data
 gem 'faker'
+
+# adapter for ActiveJob
+gem 'sidekiq'
+
+#for performing some tasks on a background thread
+# gem 'whenever', require: false
