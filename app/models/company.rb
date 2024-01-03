@@ -4,5 +4,4 @@ class Company < ApplicationRecord
   
   validates :company_name, length: { minimum: 2, maximum: 100}, presence: true, uniqueness: true #specs done
   validates :sector, :location, :establishment, length: {in: 2..100 }, presence: true #specs done
-
 end

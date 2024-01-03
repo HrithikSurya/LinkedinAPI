@@ -2,9 +2,6 @@ require 'rails_helper'
 
 RSpec.describe UserProfile, type: :model do
 
-  # before(:context) do 
-  #   user = FactoryBot.create(:user)
-  # end 
   let!(:user) { FactoryBot.create(:user) }
   
   context "is valid when creating a UserProfile" do

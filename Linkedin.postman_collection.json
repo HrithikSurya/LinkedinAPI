@@ -1,0 +1,856 @@
+{
+	"info": {
+		"_postman_id": "7740c91d-7c9d-4474-8c3b-6f71e757a7d4",
+		"name": "Linkedin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30320331"
+	},
+	"item": [
+		{
+			"name": "register new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":{\n        \"email\":\"test79000@gmail.com\",\n        \"password\":\"123456\",\n        \"name\":\"test22\",\n        \"role\":1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":{\n        \"email\":\"jojo@gmail.com\",\n        \"password\":\"123456\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/sign_in",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NzJmYWU0MS03MjY2LTRmNjktODI3Mi01MTI2ZDhmZjc1YWUiLCJzdWIiOiIxOCIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTcwMzc3NTk0NywiZXhwIjoxNzAzNzc3NDQ3fQ.gtTDIwd6hDS_hBzcvMtmoWX7HvRXfN8n_GuhvpfrdK4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/sign_out",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"sign_out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_user",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwNDA4ZWFmYy0wMTRiLTRiNGQtOTA1ZC1kNzFiZTI4N2Y1ODEiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODQ0MTMxLCJleHAiOjE2OTg4NDc3MzF9.Opmjeq6fVvktkRplIGRV0YNzaagHNRnt5Pikctv568g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":{\n        // \"name\":\"yashaswi_lounda\",\n        \"role\":\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show_specific_user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/users/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzM2U2NjhlNS01MmEzLTRmYzItODYwZi0zMDU1ZTc2ZjBlYWIiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODUwNjg3LCJleHAiOjE2OTg4NTQyODd9.7C8PC3d37I7Z63mcMJoqCuvBF8ZVy78PchFbd0dJhZg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/users/users/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all userprofiles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/user_profiles?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_profiles"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Userprofiles",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_profile\":{\n        \"title\":\"backend developer\",\n        \"designation\":\"software engineer\",\n        \"experience\":\"7+\",\n        \"qualification\":\"MTEch\",\n        \"skill_set\":\"html css\",\n        \"location\":\"INdore\"      \n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user_profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show specific userprofiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/user_profiles/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_profiles",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete specific userprofile",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzM2U2NjhlNS01MmEzLTRmYzItODYwZi0zMDU1ZTc2ZjBlYWIiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODUwNjg3LCJleHAiOjE2OTg4NTQyODd9.7C8PC3d37I7Z63mcMJoqCuvBF8ZVy78PchFbd0dJhZg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/user_profiles/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_profiles",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_user profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyYmI3OTgxMi1mM2NkLTQwYTItOWQwOS0yNzk4ZTc1ZWJmNjIiLCJzdWIiOiI1Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODY1NDAyLCJleHAiOjE2OTg4NjY5MDJ9.p2ijpQ6ZoMKG3NqhduqYYjaHHrAWNDvRbeefS5WVF7w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_profile\":{\n      \"title\": \"Team Lead\",\n      \"designation\": \"software engineer\",\n      \"experience\": \"7+\",\n      \"qualification\": \"MTEch\",\n      \"skill_set\": \"html css, javascript\",\n      \"location\": \"Banglore\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user_profiles/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user_profiles",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all job profiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/job_profiles?page=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_profiles"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create job profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyZDVmYWIxYS1kOTFhLTQwODMtYTM5OC02ODZjODgwZGZjNGQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODY2Nzc2LCJleHAiOjE2OTg4NjgyNzZ9.iQHXbIRay6p3RS9IgNt3wjeteL8LSjNLUiaohKP447M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"job_profile\":{\n      \"title\": \"testtttttting\",\n      \"job_description\": \" 555555555555555555555555555555555555555555555555554444444444444444447+ yrs experience,no_of_experience:\",\n      \"no_of_openings\": \"163\",\n      \"requirement\": \"fresher\",\n      \"skills_required\": \"ROR, Restful API, API Integration, Ruby,HTML,CSS,JavaScript\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/job_profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show specific job profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyZDVmYWIxYS1kOTFhLTQwODMtYTM5OC02ODZjODgwZGZjNGQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODY2Nzc2LCJleHAiOjE2OTg4NjgyNzZ9.iQHXbIRay6p3RS9IgNt3wjeteL8LSjNLUiaohKP447M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"job_profile\":{\n      \"title\": \"Software Engineer\",\n      \"job_description\": \" 7+ yrs experience,no_of_experience:\",\n      \"no_of_openings\": \"163\",\n      \"requirement\": \"fresher\",\n      \"skills_required\": \"ROR, Restful API, API Integration, Ruby,HTML,CSS,JavaScript\",\n      \"company_id\": 2\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/job_profiles/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_profiles",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete job profile",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmNTgxN2E5OS00MmVmLTQxMDAtYWJlNS04YzY0ZmE3MzdiNjUiLCJzdWIiOiIxMyIsInNjcCI6InVzZXIiLCJhdWQiOm51bGwsImlhdCI6MTY5OTQ3OTk3NywiZXhwIjoxNjk5NDgxNDc3fQ.BH9b8ZzoF0hyVGeuz7EmRTXfGFJ5yekBG7IVsjWzatw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/job_profiles/17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_profiles",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update job profile",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyZDVmYWIxYS1kOTFhLTQwODMtYTM5OC02ODZjODgwZGZjNGQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODY2Nzc2LCJleHAiOjE2OTg4NjgyNzZ9.iQHXbIRay6p3RS9IgNt3wjeteL8LSjNLUiaohKP447M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"job_profile\":{\n      \"title\": \"Software tantan\",\n      \"job_description\": \" 0\",\n      \"no_of_openings\": \"163\",\n      \"requirement\": \"fresher\",\n      \"skills_required\": \"ROR, Restful API, API Integration, Ruby,HTML,CSS,JavaScript\",\n      \"company_id\": 2\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/job_profiles/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_profiles",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all company",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyNmZkOWVlZS1hYTAyLTRhNjEtYjM1Mi05MjIwZDlkN2FjNjQiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAwMDU5MDAwLCJleHAiOjE3MDAwNjA1MDB9.z751168oTe00g8EhPJ5c2SCDK60D4jTB6hW966lJ7eo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/companies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show specific company",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyZDVmYWIxYS1kOTFhLTQwODMtYTM5OC02ODZjODgwZGZjNGQiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4ODY2Nzc2LCJleHAiOjE2OTg4NjgyNzZ9.iQHXbIRay6p3RS9IgNt3wjeteL8LSjNLUiaohKP447M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/companies/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMWY3MTMzMS1mNjczLTQzOGQtOWE1NS04Y2E5NTJhMGU0NDMiLCJzdWIiOiI0Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4OTMwNzE2LCJleHAiOjE2OTg5MzIyMTZ9.Y68l280mzhSxamdcn1l4w0QGNcKTz5Dw6z37-GpUrgQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"company\":{\n        \"company_name\":\"codetech\",\n        \"sector\":\"IT\",\n        \"location\":\"usa\",\n        \"establishment\":\"2020\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/companies/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMWY3MTMzMS1mNjczLTQzOGQtOWE1NS04Y2E5NTJhMGU0NDMiLCJzdWIiOiI0Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4OTMwNzE2LCJleHAiOjE2OTg5MzIyMTZ9.Y68l280mzhSxamdcn1l4w0QGNcKTz5Dw6z37-GpUrgQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/companies/14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMWY3MTMzMS1mNjczLTQzOGQtOWE1NS04Y2E5NTJhMGU0NDMiLCJzdWIiOiI0Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4OTMwNzE2LCJleHAiOjE2OTg5MzIyMTZ9.Y68l280mzhSxamdcn1l4w0QGNcKTz5Dw6z37-GpUrgQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"company\":{\n        \"company_name\":\"Nextgen\",\n        \"sector\":\"IT\",\n        \"location\":\"IND\",\n        \"establishment\":\"2013\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/companies/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all JobApplications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/job_applications/index",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_applications",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show specific JobApplication",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/job_applications/show/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_applications",
+						"show",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view approved job applications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/job_applications/view_approved_job_application",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_applications",
+						"view_approved_job_application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view rejected job applications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5MDIxMGEzZC0wMDczLTQ0ZjQtYjU0ZC01NWZmYjBhZmU5Y2YiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAwMDg0NzgyLCJleHAiOjE3MDAwODYyODJ9.xb1Tx_rnWHj33mhQIOfV-42GbeoXdYbkFCNdlcw-jU4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/job_applications/view_rejected_job_application",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"job_applications",
+						"view_rejected_job_application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view applied job applications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5MDIxMGEzZC0wMDczLTQ0ZjQtYjU0ZC01NWZmYjBhZmU5Y2YiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAwMDg0NzgyLCJleHAiOjE3MDAwODYyODJ9.xb1Tx_rnWHj33mhQIOfV-42GbeoXdYbkFCNdlcw-jU4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000 /job_applications/applied_job_application",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000 ",
+					"path": [
+						"job_applications",
+						"applied_job_application"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

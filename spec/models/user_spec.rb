@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   context 'Validates when creating a user' do 
-    # let(:user) { FactoryBot.create(:user, email:'user1@gmail.com') }
 
     it 'is valid with all valid attributes' do
       user = FactoryBot.build(:user)

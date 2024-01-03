@@ -8,10 +8,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def respond_with(current_user, _opts = {})
     if resource.persisted?
       UserMailer.with(user: current_user).welcome_email.deliver_later
-      render json: {
-        status: 'Signed up successfully.',
-        data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
-      }, status: 200
+      # render json: {
+      #   status: 'Signed up successfully.',
+      #   data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
+      # }, status: 200
+      render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes],
+      status: 200
     else
       render json: {
       message:  {status: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}

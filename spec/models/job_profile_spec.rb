@@ -57,7 +57,6 @@ RSpec.describe JobProfile, type: :model do
     it 'validates the persence of no_of_openings' do 
       job_profile = FactoryBot.build(:job_profile, no_of_openings: 111111111111, company_id: 127)
       expect(job_profile).not_to be_valid
-      debugger
     end     
 
     it 'validates the presence of skills_required' do 
@@ -73,6 +72,4 @@ RSpec.describe JobProfile, type: :model do
     end 
 
   end 
-
-
 end

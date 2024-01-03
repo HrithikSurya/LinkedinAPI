@@ -24,12 +24,11 @@ Rails.application.routes.draw do
   end
 
   resources :job_profiles, except: [:new, :edit]
-  resources :user_profiles, except: [:new, :edit]  
+  resources :user_profiles, except: [:new, :edit]
   resources :companies, except: [:new, :edit]
 
   get '/suggestions', to: 'suggestions#user'
   
-  mount Sidekiq::Web => '/sidekiq'    
+  mount Sidekiq::Web => '/sidekiq'
   
 end
- 

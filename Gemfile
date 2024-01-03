@@ -70,3 +70,5 @@ gem 'sidekiq'
 
 #for performing some tasks on a background thread
 # gem 'whenever', require: false
+
+gem "doorkeeper", "~> 5.6"

@@ -22,11 +22,11 @@ class Users::SessionsController < Devise::SessionsController
       render json: {
         status: 200,
         message: 'Logged out successfully.'
-      }, status: 200
+      }, status: :ok
     else
       render json: {
         status: 401,
-        message: "Couldn't find an active session."
+        message: "Couldn't find an active session."0
       }, status: :unauthorized
     end
   end

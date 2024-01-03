@@ -9,5 +9,4 @@ class GreetusersJob
       LinkedinMailer.greetings(user).deliver_now
     end
   end
-  
 end
