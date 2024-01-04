@@ -4,22 +4,18 @@ class Users::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    if params[:q].blank?
+    params[:q].blank? && (
       @users = User.all
       render json: @users, status: 200
-    else params[:q]
+    ) || (
       @q = User.ransack(params[:q])
       @users = @q.result
       render json: @users, status: 200
-    end
+    )
   end
 
   def show
-    if @user
-      render_user_serializer(@user)
-    else
-      render_not_found
-    end
+    @user  &&  render_user_serializer(@user)  ||  render_not_found
   end
 
   def create

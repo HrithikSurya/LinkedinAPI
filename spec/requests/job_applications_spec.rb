@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "JobApplications", type: :request do
-  let(:user) { FactoryBot.create(:user, role: "job_recruiter") }
-  before do
-    sign_in user
-  end
+  
+  include_context "shared_authenticated_job_recruiter_user"
   
   describe "GET /job_applications" do
     it "list all the JobApplications" do
