@@ -4,8 +4,14 @@ class Users::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    @users = User.all
-    render json: @users, status: 200
+    if params[:q].blank?
+      @users = User.all
+      render json: @users, status: 200
+    else params[:q]
+      @q = User.ransack(params[:q])
+      @users = @q.result
+      render json: @users, status: 200
+    end
   end
 
   def show

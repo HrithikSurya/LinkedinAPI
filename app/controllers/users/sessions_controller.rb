@@ -26,7 +26,7 @@ class Users::SessionsController < Devise::SessionsController
     else
       render json: {
         status: 401,
-        message: "Couldn't find an active session."0
+        message: "Couldn't find an active session."
       }, status: :unauthorized
     end
   end

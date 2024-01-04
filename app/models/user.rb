@@ -15,4 +15,14 @@ class User < ApplicationRecord
   def jwt_payload
     super
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['name', 'email','role']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    # Define the associations you want to allow for searching and sorting
+    %w[name email role]
+  end
+
 end
