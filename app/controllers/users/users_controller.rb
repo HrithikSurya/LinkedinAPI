@@ -6,11 +6,9 @@ class Users::UsersController < ApplicationController
   def index
     params[:q].blank? && (
       @users = User.all
-      render json: @users, status: 200
     ) || (
       @q = User.ransack(params[:q])
-      @users = @q.result
-      render json: @users, status: 200
+      @users = @q.result #not working for role attribute
     )
   end
 
