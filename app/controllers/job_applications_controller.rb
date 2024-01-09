@@ -4,7 +4,7 @@ class JobApplicationsController < ApplicationController
                                               :accept_job_application ]
 
   def index
-    @job_applications = JobApplication.all
+    @job_applications = JobApplication.order(:id).page(params[:page]).per(4)
     render json: @job_applications, status: 200
   end
 

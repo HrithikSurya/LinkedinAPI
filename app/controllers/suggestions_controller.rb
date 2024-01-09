@@ -61,7 +61,7 @@ class SuggestionsController < ApplicationController
       end
       c=0
     end
-    render json: suggestions, status:200  
+    render json: suggestions, status:200
   end
 
   private

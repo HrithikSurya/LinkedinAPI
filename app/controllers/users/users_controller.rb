@@ -5,10 +5,10 @@ class Users::UsersController < ApplicationController
 
   def index
     params[:q].blank? && (
-      @users = User.all
+      @users = User.order(:id).page(params[:page]).per(4)
     ) || (
       @q = User.ransack(params[:q])
-      @users = @q.result #not working for role attribute
+      @users = @q.result.page(params[:page]).per(4)
     )
   end
 

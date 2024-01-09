@@ -4,8 +4,12 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update, :destroy]
 
   def index
-    @companies = Company.all #need to be paginate
-    render json: @companies, status: 200
+  params[:q].blank?  &&  (
+    @companies = Company.page(params[:page]).per(4)
+  ) || (
+    @q = Company.ransack(params[:q])
+    @companies = @q.result.page(params[:page]).per(4)
+  )
   end
 
   def create
@@ -19,13 +23,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def show #body remains blank 'cause we have used jbuilder for crafting the view for show action
-    # if @company
-    #   render_company_serializer(@company)
-    # else
-    #   render json: 'Company Not Found', status: 404
-    # end
-  end
+  def show; end
 
   def update
     if @company.update(company_params)
@@ -39,13 +37,12 @@ class CompaniesController < ApplicationController
   def destroy
     if @company
       if @company.destroy
-        # render json: "Company Deleted Successfully", status: 200
-        render 'destroy', status: 200   
+        render 'destroy', status: 200
       else 
-        render json: @company.errors.full_messages, status: 422
+        render 'destroy', status: 422
       end
     else
-      render json: 'Company Not Found', status: 404
+      render 'destroy', status: 404
     end
   end
 
