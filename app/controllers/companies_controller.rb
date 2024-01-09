@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
       # render_company_serializer(@company)
       render 'update', status: 200
     else
-      render json: @company.errors.full_messages, status: 422
+      render 'update', status: 422
     end
   end
 
