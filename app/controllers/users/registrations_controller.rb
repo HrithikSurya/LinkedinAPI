@@ -3,15 +3,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionsFix
 
   respond_to :json
+
+  def destroy
+    resource.destroy ? (render json: "User registration deleted successfully") :
+    (render_with_flash(:unprocessable_entity, "Failed to delete user registration"))
+  end
+
   private
 
   def respond_with(current_user, _opts = {})
     if resource.persisted?
       UserMailer.with(user: current_user).welcome_email.deliver_later
-      # render json: {
-      #   status: 'Signed up successfully.',
-      #   data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
-      # }, status: 200
       render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes],
       status: 200
     else

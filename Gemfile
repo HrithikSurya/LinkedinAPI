@@ -69,3 +69,5 @@ gem 'sidekiq'
 
 # for searching n sorting 
 gem "ransack", "~> 4.1"
+
+gem "rswag"

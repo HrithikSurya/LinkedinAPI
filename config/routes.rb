@@ -1,5 +1,8 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+  
   get 'job_applications/index', to: 'job_applications#index'
   get 'job_applications/show/:id', to: 'job_applications#show'
 

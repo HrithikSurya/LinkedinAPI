@@ -5,6 +5,6 @@ FactoryBot.define do
     experience { "3yrs+" }
     qualification { 'Masters in Computer applications 86%, Bachelors in Computer Application 75%, XII 80%' }
     skill_set { Faker::Lorem.unique :string }
-    location { Faker::Travel::TrainStation.name(region: 'spain') }
+    location { "Bharat" }
   end
 end
